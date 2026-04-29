@@ -1,95 +1,304 @@
-<?php
-session_start();
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيادة د. هيام بدران</title>
+    <meta name="description" content="استشارات نفسية وزوجية في إطار مريح وآمن.">
+    
+    <!-- Google Fonts: Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-if ($_POST) {
-    // ✅ بيانات الدكتورة هيام - محدثة
-    $YOUR_EMAIL = "hayam141173@gmail.com";     // ✅ إيميلك
-    $YOUR_PHONE = "01149340228";               // ✅ رقمك
-    $CLINIC_NAME = "عيادة د. هيام بدران";
-    
-    // جمع البيانات من النموذج
-    $name = htmlspecialchars($_POST['name']);
-    $phone = htmlspecialchars($_POST['phone']);
-    $email = htmlspecialchars($_POST['email'] ?? 'غير محدد');
-    $date = $_POST['date'];
-    $time = htmlspecialchars($_POST['time'] ?? 'غير محدد');
-    $service = htmlspecialchars($_POST['service']);
-    $notes = htmlspecialchars($_POST['notes'] ?? 'لا يوجد');
-    
-    // تنسيق التاريخ العربي
-    $months = [
-        '01' => 'يناير', '02' => 'فبراير', '03' => 'مارس', '04' => 'أبريل',
-        '05' => 'مايو', '06' => 'يونيو', '07' => 'يوليو', '08' => 'أغسطس',
-        '09' => 'سبتمبر', '10' => 'أكتوبر', '11' => 'نوفمبر', '12' => 'ديسمبر'
-    ];
-    $date_parts = explode('-', $date);
-    $date_ar = $date_parts[2] . ' ' . $months[$date_parts[1]] . ' ' . $date_parts[0];
-    
-    // رسالة الإيميل الاحترافية
-    $subject = "🚨 عيادة د. هيام بدران | طلب حجز جديد من $name";
-    
-    $message = "
-    <html>
-    <head><meta charset='UTF-8'></head>
-    <body style='font-family: Cairo, Arial, sans-serif; line-height: 1.6; color: #333;'>
-        <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center;'>
-            <h1 style='margin: 0; font-size: 28px;'>📅 طلب حجز جديد</h1>
-            <p style='margin: 10px 0 0 0; font-size: 18px;'>عيادة د. هيام بدران</p>
-        </div>
-        
-        <div style='padding: 30px; max-width: 600px; margin: 0 auto;'>
-            <table style='width: 100%; border-collapse: collapse; margin: 20px 0; background: #f8f9fa; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);'>
-                <tr style='background: #667eea; color: white;'>
-                    <th style='padding: 18px; text-align: right; font-size: 16px;'>البيانات</th>
-                    <th style='padding: 18px; text-align: right; font-size: 16px;'>القيمة</th>
-                </tr>
-                <tr><td style='padding: 18px; border-bottom: 1px solid #eee; font-weight: bold; font-size: 16px;'>👤 الاسم الكامل</td><td style='padding: 18px; border-bottom: 1px solid #eee;'><strong style='font-size: 18px;'>$name</strong></td></tr>
-                <tr><td style='padding: 18px; border-bottom: 1px solid #eee; font-weight: bold; font-size: 16px;'>📱 رقم الهاتف</td><td style='padding: 18px; border-bottom: 1px solid #eee;'><strong style='font-size: 20px; color: #25D366;'>$phone</strong></td></tr>
-                <tr><td style='padding: 18px; border-bottom: 1px solid #eee; font-weight: bold; font-size: 16px;'>✉️ البريد الإلكتروني</td><td style='padding: 18px; border-bottom: 1px solid #eee; font-size: 15px;'>$email</td></tr>
-                <tr><td style='padding: 18px; border-bottom: 1px solid #eee; font-weight: bold; font-size: 16px;'>📅 تاريخ الحجز</td><td style='padding: 18px; border-bottom: 1px solid #eee;'><strong style='font-size: 18px; color: #28a745;'>$date_ar</strong></td></tr>
-                <tr><td style='padding: 18px; border-bottom: 1px solid #eee; font-weight: bold; font-size: 16px;'>🕒 الوقت المطلوب</td><td style='padding: 18px; border-bottom: 1px solid #eee; font-size: 16px;'>$time</td></tr>
-                <tr><td style='padding: 18px; border-bottom: 1px solid #eee; font-weight: bold; font-size: 16px;'>🎯 نوع الاستشارة</td><td style='padding: 18px; border-bottom: 1px solid #eee;'><strong style='font-size: 17px; color: #007bff;'>$service</strong></td></tr>
-                <tr><td style='padding: 18px; font-weight: bold; font-size: 16px;'>💬 ملاحظات إضافية</td><td style='padding: 18px; font-size: 15px;'>" . nl2br($notes) . "</td></tr>
-            </table>
-            
-            <div style='text-align: center; margin: 30px 0; padding: 20px; background: #f0f8ff; border-radius: 15px; border-left: 6px solid #25D366;'>
-                <h3 style='color: #25D366; margin-bottom: 15px;'>📲 تواصل سريع مع العميل:</h3>
-                <a href='https://wa.me/2$phone?text=مرحبا د.هيام، حجزت موعد: $name - $date_ar $time - $service' 
-                   style='background: #25D366; color: white; padding: 18px 35px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 18px; display: inline-block; margin: 0 15px; box-shadow: 0 5px 15px rgba(37,211,102,0.4);'>💬 واتساب العميل</a>
-                <a href='tel:$phone' style='background: #dc3545; color: white; padding: 18px 35px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 18px; display: inline-block; box-shadow: 0 5px 15px rgba(220,53,69,0.4);'>📞 اتصال فوري</a>
+    <!-- Header / Navigation -->
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fa-solid fa-seedling"></i>
+                <div class="logo-text">
+                    <p>عيادة د. هيام بدران</p>
+                </div>
             </div>
-            
-            <div style='background: #e8f5e8; padding: 20px; border-radius: 10px; text-align: center; border-left: 5px solid #28a745; margin-top: 20px;'>
-                <p><strong>⏰ تم الاستلام:</strong> " . date('l d M Y الساعة H:i') . "</p>
-                <p><em>تم الإرسال تلقائياً من موقع العيادة</em></p>
+            <nav class="main-nav" id="navbar">
+                <ul>
+                    <li><a href="#home" class="active">الرئيسية</a></li>
+                    <li><a href="#about">عن الدكتورة</a></li>
+                    <li><a href="#services">الاستشارات</a></li>
+                    <li><a href="#contact">احجز موعد <i class="fa-solid fa-calendar-check"></i></a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fa-solid fa-calendar-check"></i> احجز موعد
+                </a>
+                <div class="mobile-toggle" id="mobile-menu-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
             </div>
         </div>
-    </body>
-    </html>
-    ";
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="hero-badge">🌿 استشارات نفسية متوازنة</span>
+                <h1>رحلة نحو السكينة النفسية<br> <span class="text-primary">في أجواء آمنة ومريحة</span></h1>
+                <p class="hero-text">
+                    مع د. هيام بدران، نبدأ رحلة الفهم وإيجاد الحلول. 
+                    مساحة خصيصاً لكِ ولعائلتكِ لتعزيز الصحة النفسية وبناء علاقات سليمة.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fa-solid fa-calendar-check"></i> احجز استشارة الآن
+                    </a>
+                    <a href="#services" class="btn btn-secondary">
+                        <i class="fa-solid fa-list-check"></i> اكتشف الخدمات
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="جلسة استشارة نفسية" class="rounded-shape">
+                <div class="experience-badge">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <div>أكثر من 10 سنوات خبرة</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>من نكون؟</h2>
+                <div class="line"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-card">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="د. هيام بدران" class="about-img">
+                    <div class="about-info">
+                        <h3>د. هيام بدران</h3>
+                        <p class="subtitle">استشارية نفسية متخصصة</p>
+                        <p>
+                            نؤمن بأن العلاج النفسي ليس مجرد حديث، بل هو جسر للسلام الداخلي. 
+                            نحن ندعمكم في تجاوز التحديات النفسية، تحسين جودة الحياة، وبناء علاقات قوية ومتينة. 
+                            نلتزم بالسرية التامة والإطار الأخلاقي في جميع جلساتنا.
+                        </p>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-check"></i> تشخيص دقيق ورصد الحالة</li>
+                            <li><i class="fa-solid fa-check"></i> خطط علاجية مخصصة لكل حالة</li>
+                            <li><i class="fa-solid fa-check"></i> بيئة آمنة خالية من الأحكام</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>خدماتنا العلاجية</h2>
+                <p>نقدم باقة شاملة من الخدمات لضمان العناية الكاملة بصحتك النفسية</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3>العلاج الزوجي</h3>
+                    <p>مساحة آمنة لحل الخلافات وبناء لغة komunikasi مفهومة بين الزوجين، وتقوية الروابط الأسرية.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3>استشارات فردية</h3>
+                    <p>دعم نفسي للأفراد الذين يعانون من التوتر، القلق، الاكتئاب، أو الحاجة لتغيير نمط حياتهم.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3>تأهيل وبناء teams</h3>
+                    <p>ورش عمل وجلسات لتعزيز مهارات التواصل وحل المشكلات في بيئة العمل والأسرة.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h3>تنمية شخصية</h3>
+                    <p>جلسات تركز على اكتشاف الذات، بناء الثقة بالنفس، وتطوير المهارات الشخصية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Booking Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2><i class="fa-solid fa-calendar-check"></i> احجز موعدك الآن</h2>
+                <p>املأ النموذج وسيتم التواصل معك خلال ساعة لتأكيد الموعد</p>
+            </div>
+            
+            <div class="contact-wrapper">
+                <!-- Contact Info & Booking Form -->
+                <div class="contact-info">
+                    <!-- Contact Details -->
+                    <div class="info-item">
+                        <div class="icon-wrap"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="text">
+                            <h4>العنوان</h4>
+                            <p>جسر السيالة<br>شارع المدينة المنورة عمارة أب ركبة</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="icon-wrap"><i class="fa-solid fa-phone-flip"></i></div>
+                        <div class="text">
+                            <h4>اتصل بنا فوراً</h4>
+                            <a href="tel:+201149340228" class="phone-link">+20 1149340228</a>
+                            <p class="sub-text">(اضغط للاتصال المباشر)</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="icon-wrap"><i class="fa-solid fa-clock"></i></div>
+                        <div class="text">
+                            <h4>ساعات العمل</h4>
+                            <p>يومياً من 2 ظهراً حتى 10 مساءً</p>
+                        </div>
+                    </div>
+
+                    <!-- 🔥 نظام الحجز الكامل الجديد 🔥 -->
+                    <div class="booking-form-container">
+                        <h3>📅 نموذج الحجز السريع</h3>
+                        <form class="contact-form" id="booking-form" action="send_booking.php" method="POST">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" name="name" placeholder="👤 الاسم الكامل" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" name="phone" placeholder="📱 رقم الهاتف" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="✉️ البريد الإلكتروني (اختياري)">
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" name="date" min="<?php echo date('Y-m-d'); ?>" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <select name="service" required>
+                                        <option value="">🎯 نوع الاستشارة</option>
+                                        <option value="العلاج الزوجي">💑 العلاج الزوجي</option>
+                                        <option value="استشارات فردية">🧠 استشارات فردية</option>
+                                        <option value="تأهيل وبناء teams">👥 تأهيل وفرق عمل</option>
+                                        <option value="تنمية شخصية">🌱 تنمية شخصية</option>
+                                        <option value="أخرى">❓ استشارة أخرى</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="time">
+                                        <option value="">🕒 الوقت المفضل</option>
+                                        <option value="2:00 م">2:00 ظهراً</option>
+                                        <option value="4:00 م">4:00 عصراً</option>
+                                        <option value="6:00 م">6:00 مساءً</option>
+                                        <option value="8:00 م">8:00 مساءً</option>
+                                        <option value="10:00 م">10:00 ليلاً</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="notes" rows="3" placeholder="💬 ملاحظات إضافية (اختياري)"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fa-solid fa-paper-plane"></i> إرسال طلب الحجز
+                            </button>
+                        </form>
+                        
+                        <!-- رسالة النجاح -->
+                        <?php
+                        if (isset($_SESSION['booking_success'])) {
+                            $success = $_SESSION['booking_success'];
+                            unset($_SESSION['booking_success']);
+                        ?>
+                        <div class="success-message" style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; border: 2px solid #c3e6cb;">
+                            <h4>✅ تم الحجز بنجاح!</h4>
+                            <p>شكراً لك <?php echo htmlspecialchars($success['name']); ?>، سنتصل بك قريباً على رقم: <strong><?php echo $success['phone']; ?></strong></p>
+                            <?php if ($success['mail_sent']): ?>
+                            <p>📧 تم إرسال التفاصيل على الإيميل</p>
+                            <?php endif; ?>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <!-- Map Placeholder -->
+                <div class="map-container">
+                    <div style="height: 400px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; border-radius: 15px; color: #666;">
+                        <i class="fa-solid fa-map-location-dot" style="font-size: 4em;"></i>
+                        <p style="margin-right: 20px;">خريطة الموقع قريباً</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fa-solid fa-seedling"></i>
+                    <p>د. هيام بدران</p>
+                </div>
+                <div class="footer-links">
+                    <p>جميع الحقوق محفوظة © 2024</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://wa.me/201149340228" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Link -->
+    <script src="main.js"></script>
     
-    // إعدادات الإيميل
-    $headers = "MIME-Version: 1.0\r\n";
-    $headers .= "Content-type:text/html;charset=UTF-8\r\n";
-    $headers .= "From: noreply@hayamclinic.com\r\n";
-    $headers .= "Reply-To: hayam141173@gmail.com\r\n";
-    
-    // إرسال الإيميل للدكتورة
-    $mail_sent = mail($YOUR_EMAIL, $subject, $message, $headers);
-    
-    // حفظ جميع الحجوزات في ملف نصي
-    $log = date('Y-m-d H:i:s') . " | $name | $phone | $date_ar | $time | $service | $notes\n";
-    file_put_contents('bookings.txt', $log, FILE_APPEND | LOCK_EX);
-    
-    // حفظ بيانات النجاح للعميل
-    $_SESSION['booking_success'] = [
-        'name' => $name,
-        'phone' => $phone,
-        'mail_sent' => $mail_sent
-    ];
-    
-    // إعادة توجيه لنفس الصفحة مع رسالة النجاح
-    header("Location: " . $_SERVER['PHP_SELF'] . "#contact");
-    exit();
-}
-?>
+    <!-- Booking Form Validation -->
+    <script>
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            const phone = this.querySelector('input[name="phone"]').value;
+            const phoneRegex = /^01[0-9]{9}$/;
+            
+            if (!phoneRegex.test(phone)) {
+                e.preventDefault();
+                alert('📱 يرجى إدخال رقم هاتف صحيح (مثال: 01149340228)');
+                return false;
+            }
+            
+            // إظهار loading
+            const btn = this.querySelector('button[type="submit"]');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الإرسال...';
+            btn.disabled = true;
+        });
+    </script>
+</body>
+</html>
