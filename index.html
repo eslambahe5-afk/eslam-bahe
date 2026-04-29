@@ -25,7 +25,6 @@
             <div class="logo">
                 <i class="fa-solid fa-seedling"></i>
                 <div class="logo-text">
-               
                     <p>عيادة د. هيام بدران</p>
                 </div>
             </div>
@@ -34,11 +33,13 @@
                     <li><a href="#home" class="active">الرئيسية</a></li>
                     <li><a href="#about">عن الدكتورة</a></li>
                     <li><a href="#services">الاستشارات</a></li>
-                    <li><a href="#contact">تواصل معنا</a></li>
+                    <li><a href="#contact">احجز موعد <i class="fa-solid fa-calendar-check"></i></a></li>
                 </ul>
             </nav>
             <div class="header-actions">
-                <a href="tel:+201149340228" class="btn btn-outline"><i class="fa-solid fa-phone"></i> احجز موعد</a>
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fa-solid fa-calendar-check"></i> احجز موعد
+                </a>
                 <div class="mobile-toggle" id="mobile-menu-btn">
                     <i class="fa-solid fa-bars"></i>
                 </div>
@@ -69,10 +70,7 @@
                 <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="جلسة استشارة نفسية" class="rounded-shape">
                 <div class="experience-badge">
                     <i class="fa-solid fa-user-doctor"></i>
-                    <div>
-                        
-                     
-                    </div>
+                    <div>أكثر من 10 سنوات خبرة</div>
                 </div>
             </div>
         </div>
@@ -115,7 +113,6 @@
                 <p>نقدم باقة شاملة من الخدمات لضمان العناية الكاملة بصحتك النفسية</p>
             </div>
             <div class="services-grid">
-                <!-- Service 1 -->
                 <div class="service-card">
                     <div class="icon-box">
                         <i class="fa-solid fa-heart-pulse"></i>
@@ -123,7 +120,6 @@
                     <h3>العلاج الزوجي</h3>
                     <p>مساحة آمنة لحل الخلافات وبناء لغة komunikasi مفهومة بين الزوجين، وتقوية الروابط الأسرية.</p>
                 </div>
-                <!-- Service 2 -->
                 <div class="service-card">
                     <div class="icon-box">
                         <i class="fa-solid fa-brain"></i>
@@ -131,7 +127,6 @@
                     <h3>استشارات فردية</h3>
                     <p>دعم نفسي للأفراد الذين يعانون من التوتر، القلق، الاكتئاب، أو الحاجة لتغيير نمط حياتهم.</p>
                 </div>
-                <!-- Service 3 -->
                 <div class="service-card">
                     <div class="icon-box">
                         <i class="fa-solid fa-users"></i>
@@ -139,7 +134,6 @@
                     <h3>تأهيل وبناء teams</h3>
                     <p>ورش عمل وجلسات لتعزيز مهارات التواصل وحل المشكلات في بيئة العمل والأسرة.</p>
                 </div>
-                <!-- Service 4 -->
                 <div class="service-card">
                     <div class="icon-box">
                         <i class="fa-solid fa-seedling"></i>
@@ -151,30 +145,30 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact & Booking Section -->
     <section id="contact" class="contact-section">
         <div class="container">
             <div class="section-header text-center">
-                <h2>تواصل معنا</h2>
-                <p>نحن هنا لنسمعك، لا تتردد في الاتصال بنا</p>
+                <h2><i class="fa-solid fa-calendar-check"></i> احجز موعدك الآن</h2>
+                <p>املأ النموذج وسيتم التواصل معك خلال ساعة لتأكيد الموعد</p>
             </div>
             
             <div class="contact-wrapper">
-                <!-- Info & Phone -->
+                <!-- Contact Info & Booking Form -->
                 <div class="contact-info">
+                    <!-- Contact Details -->
                     <div class="info-item">
                         <div class="icon-wrap"><i class="fa-solid fa-location-dot"></i></div>
                         <div class="text">
                             <h4>العنوان</h4>
-                            <p> جسر السيالة<br> شارع المدينه المنورة عمارة اب ركبه</p>
+                            <p>جسر السيالة<br>شارع المدينة المنورة عمارة أب ركبة</p>
                         </div>
                     </div>
                     
                     <div class="info-item">
                         <div class="icon-wrap"><i class="fa-solid fa-phone-flip"></i></div>
                         <div class="text">
-                            <h4>اتصل بنا لاستشارة</h4>
-                            <!-- Replace with real number -->
+                            <h4>اتصل بنا فوراً</h4>
                             <a href="tel:+201149340228" class="phone-link">+20 1149340228</a>
                             <p class="sub-text">(اضغط للاتصال المباشر)</p>
                         </div>
@@ -188,30 +182,79 @@
                         </div>
                     </div>
 
-                    <!-- Form -->
-                    <form class="contact-form" id="booking-form">
-                        <h3>لطلب جلسه</h3>
-                        <div class="form-group">
-                            <input type="text" placeholder="الاسم " required>
+                    <!-- 🔥 نظام الحجز الكامل الجديد 🔥 -->
+                    <div class="booking-form-container">
+                        <h3>📅 نموذج الحجز السريع</h3>
+                        <form class="contact-form" id="booking-form" action="send_booking.php" method="POST">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" name="name" placeholder="👤 الاسم الكامل" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" name="phone" placeholder="📱 رقم الهاتف" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="✉️ البريد الإلكتروني (اختياري)">
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" name="date" min="<?php echo date('Y-m-d'); ?>" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <select name="service" required>
+                                        <option value="">🎯 نوع الاستشارة</option>
+                                        <option value="العلاج الزوجي">💑 العلاج الزوجي</option>
+                                        <option value="استشارات فردية">🧠 استشارات فردية</option>
+                                        <option value="تأهيل وبناء teams">👥 تأهيل وفرق عمل</option>
+                                        <option value="تنمية شخصية">🌱 تنمية شخصية</option>
+                                        <option value="أخرى">❓ استشارة أخرى</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="time">
+                                        <option value="">🕒 الوقت المفضل</option>
+                                        <option value="2:00 م">2:00 ظهراً</option>
+                                        <option value="4:00 م">4:00 عصراً</option>
+                                        <option value="6:00 م">6:00 مساءً</option>
+                                        <option value="8:00 م">8:00 مساءً</option>
+                                        <option value="10:00 م">10:00 ليلاً</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="notes" rows="3" placeholder="💬 ملاحظات إضافية (اختياري)"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fa-solid fa-paper-plane"></i> إرسال طلب الحجز
+                            </button>
+                        </form>
+                        
+                        <!-- رسالة النجاح -->
+                        <?php
+                        if (isset($_SESSION['booking_success'])) {
+                            $success = $_SESSION['booking_success'];
+                            unset($_SESSION['booking_success']);
+                        ?>
+                        <div class="success-message" style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; border: 2px solid #c3e6cb;">
+                            <h4>✅ تم الحجز بنجاح!</h4>
+                            <p>شكراً لك <?php echo htmlspecialchars($success['name']); ?>، سنتصل بك قريباً على رقم: <strong><?php echo $success['phone']; ?></strong></p>
+                            <?php if ($success['mail_sent']): ?>
+                            <p>📧 تم إرسال التفاصيل على الإيميل</p>
+                            <?php endif; ?>
                         </div>
-                        <div class="form-group">
-                            <input type="tel" placeholder="رقم الهاتف" required>
-                        </div>
-                        <div class="form-group">
-                            <select>
-                                <option>نوع الاستشارة</option>
-                                <option>زوجية</option>
-                                <option>فردية</option>
-                                <option></option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">إرسال الطلب</button>
-                    </form>
+                        <?php } ?>
+                    </div>
                 </div>
 
-                <!-- Map -->
+                <!-- Map Placeholder -->
                 <div class="map-container">
-                    
+                    <div style="height: 400px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; border-radius: 15px; color: #666;">
+                        <i class="fa-solid fa-map-location-dot" style="font-size: 4em;"></i>
+                        <p style="margin-right: 20px;">خريطة الموقع قريباً</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -222,14 +265,14 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                
+                    <i class="fa-solid fa-seedling"></i>
                     <p>د. هيام بدران</p>
                 </div>
                 <div class="footer-links">
                     <p>جميع الحقوق محفوظة © 2024</p>
                     <div class="social-icons">
                         <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="https://wa.me/201149340228" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
@@ -238,5 +281,24 @@
 
     <!-- JS Link -->
     <script src="main.js"></script>
+    
+    <!-- Booking Form Validation -->
+    <script>
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            const phone = this.querySelector('input[name="phone"]').value;
+            const phoneRegex = /^01[0-9]{9}$/;
+            
+            if (!phoneRegex.test(phone)) {
+                e.preventDefault();
+                alert('📱 يرجى إدخال رقم هاتف صحيح (مثال: 01149340228)');
+                return false;
+            }
+            
+            // إظهار loading
+            const btn = this.querySelector('button[type="submit"]');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الإرسال...';
+            btn.disabled = true;
+        });
+    </script>
 </body>
 </html>
