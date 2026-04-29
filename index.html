@@ -237,13 +237,7 @@
                         if (isset($_SESSION['booking_success'])) {
                             $success = $_SESSION['booking_success'];
                             unset($_SESSION['booking_success']);
-                        ?>
-                        <div class="success-message" style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; border: 2px solid #c3e6cb;">
-                            <h4>✅ تم الحجز بنجاح!</h4>
-                            <p>شكراً لك <?php echo htmlspecialchars($success['name']); ?>، سنتصل بك قريباً على رقم: <strong><?php echo $success['phone']; ?></strong></p>
-                            <?php if ($success['mail_sent']): ?>
-                            <p>📧 تم إرسال التفاصيل على الإيميل</p>
-                            <?php endif; ?>
+                        
                         </div>
                         <?php } ?>
                     </div>
