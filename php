@@ -3,7 +3,7 @@ session_start();
 
 if ($_POST) {
     // 📧 غيّر البيانات دي ببياناتك
-    $YOUR_EMAIL = "your-hayam141173@gmai.com";  // ← إيميلك هنا
+    $YOUR_EMAIL = eslambahe5@gmail.com";  // ← إيميلك هنا
     $YOUR_PHONE = "01149340228";           // ← رقم الدكتورة
     $CLINIC_NAME = "عيادة د. هيام بدران";
     
